@@ -11,13 +11,14 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
         setTitle("JL Studio");
-        setSize(600, 800);
+        setSize(1000, 800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
         try{
             loadToolbar();
             loadStatusbar();
+            loadInstrumentList();
             loadGrid();
         } catch (Exception e) {
             System.err.println("Error loading UI: " + e.getMessage());
@@ -29,18 +30,24 @@ public class MainWindow extends JFrame {
 
     }
 
+    private void loadInstrumentList() {
+    }
+
     private void loadGrid() {
         // A 4x16 grid (4 tracks, 16 beats)
         JPanel gridPanel = new JPanel(new GridLayout(4, 16));
 
         for (int i = 0; i < 64; i++) {
             JCheckBox cb = new JCheckBox();
+            cb.setIcon(new ImageIcon("res/box32.png"));
+            cb.setSelectedIcon(new ImageIcon("res/box-filled32.png"));
             cb.setSelected(false);
             checkboxList.add(cb);
             gridPanel.add(cb);
         }
 
         add(gridPanel, BorderLayout.CENTER);
+        System.out.println(checkboxList);
     }
 
     private void loadStatusbar() {
@@ -53,22 +60,26 @@ public class MainWindow extends JFrame {
 
         JButton playBtn = new JButton("Play");
         JButton stopBtn = new JButton("Stop");
-
-        // Requirement: Multiple windows (at least 3)
-        // These buttons will eventually open your Settings and About windows
         JButton settingsBtn = new JButton("Settings");
-        JButton aboutBtn = new JButton("Save/Load");
+        JButton saveBtn = new JButton("Save/Load");
+
+        playBtn.setBackground(Color.LIGHT_GRAY);
+        stopBtn.setBackground(Color.LIGHT_GRAY);
+        settingsBtn.setBackground(Color.LIGHT_GRAY);
+        saveBtn.setBackground(Color.LIGHT_GRAY);
+
+        saveBtn.setIcon(new ImageIcon("res/save16.png"));
+        settingsBtn.setIcon(new ImageIcon("res/gear16.png"));
+        playBtn.setIcon(new ImageIcon("res/play16.png"));
+        stopBtn.setIcon(new ImageIcon("res/stop16.png"));
+        //saveBtn.setPreferredSize(new Dimension(50, 50));
 
         toolbar.add(playBtn);
         toolbar.add(stopBtn);
         toolbar.add(settingsBtn);
-        toolbar.add(aboutBtn);
+        toolbar.add(saveBtn);
 
         add(toolbar, BorderLayout.NORTH);
     }
 
-    private void loadUi() {
-        JButton playButton = new JButton("Play");
-        this.add(playButton);
-    }
 }
