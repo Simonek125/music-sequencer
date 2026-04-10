@@ -8,6 +8,7 @@ import java.util.List;
 public class MainWindow extends JFrame {
 
     private List<JCheckBox> checkboxList = new ArrayList<>();
+    static protected Boolean subWindowOpened = false;
 
     public MainWindow() {
         setTitle("JL Studio");
@@ -78,15 +79,25 @@ public class MainWindow extends JFrame {
         //saveBtn.setPreferredSize(new Dimension(50, 50));
 
         saveBtn.addActionListener(e -> {
-            new SaveWindow();
+            if (!subWindowOpened) {
+                new SaveWindow();
+
+                subWindowOpened = true;
+            }
         });
 
         loadBtn.addActionListener(e -> {
-            new LoadWindow();
+            if (!subWindowOpened) {
+                new LoadWindow();
+                subWindowOpened = true;
+            }
         });
 
         settingsBtn.addActionListener(e -> {
-            new SettingsWindow();
+            if (!subWindowOpened) {
+                new SettingsWindow();
+                subWindowOpened = true;
+            }
         });
 
         toolbar.add(playBtn);
@@ -98,4 +109,7 @@ public class MainWindow extends JFrame {
         add(toolbar, BorderLayout.NORTH);
     }
 
+    public static void subWindowClosed() {
+        subWindowOpened = false;
+    }
 }
