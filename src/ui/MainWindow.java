@@ -61,23 +61,39 @@ public class MainWindow extends JFrame {
         JButton playBtn = new JButton("Play");
         JButton stopBtn = new JButton("Stop");
         JButton settingsBtn = new JButton("Settings");
-        JButton saveBtn = new JButton("Save/Load");
+        JButton saveBtn = new JButton("Save");
+        JButton loadBtn = new JButton("Load");
 
         playBtn.setBackground(Color.LIGHT_GRAY);
         stopBtn.setBackground(Color.LIGHT_GRAY);
         settingsBtn.setBackground(Color.LIGHT_GRAY);
         saveBtn.setBackground(Color.LIGHT_GRAY);
+        loadBtn.setBackground(Color.LIGHT_GRAY);
 
         saveBtn.setIcon(new ImageIcon("res/save16.png"));
+        loadBtn.setIcon(new ImageIcon("res/load16.png"));
         settingsBtn.setIcon(new ImageIcon("res/gear16.png"));
         playBtn.setIcon(new ImageIcon("res/play16.png"));
         stopBtn.setIcon(new ImageIcon("res/stop16.png"));
         //saveBtn.setPreferredSize(new Dimension(50, 50));
 
+        saveBtn.addActionListener(e -> {
+            new SaveWindow();
+        });
+
+        loadBtn.addActionListener(e -> {
+            new LoadWindow();
+        });
+
+        settingsBtn.addActionListener(e -> {
+            new SettingsWindow();
+        });
+
         toolbar.add(playBtn);
         toolbar.add(stopBtn);
         toolbar.add(settingsBtn);
         toolbar.add(saveBtn);
+        toolbar.add(loadBtn);
 
         add(toolbar, BorderLayout.NORTH);
     }
